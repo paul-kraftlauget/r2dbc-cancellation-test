@@ -1,0 +1,17 @@
+debug: false
+
+logging:
+  level:
+    io.r2dbc.mssql.QUERY: INFO # for queries
+    io.r2dbc.mssql.PARAM: INFO # for parameters
+
+spring:
+  r2dbc:
+    url: r2dbc:mssql://localhost:1433/msdb
+    username: sa
+    password: admin123!
+  flyway:
+    url: jdbc:sqlserver://localhost;encrypt=false;loginTimeout=3;
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+    baseline-on-migrate: true
