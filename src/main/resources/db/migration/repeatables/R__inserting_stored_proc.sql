@@ -1,6 +1,6 @@
 CREATE OR ALTER PROCEDURE [dbo].[insertManyUsers]
 (
-    @json NVARCHAR
+    @json NVARCHAR(MAX)
 )
 AS
 BEGIN
@@ -9,7 +9,7 @@ BEGIN
     SELECT *
     FROM OPENJSON(@json)
       WITH (
-        id INT 'strict $.id',
+        id INT '$.id',
         userId VARCHAR(45) '$.userId'
       );
 

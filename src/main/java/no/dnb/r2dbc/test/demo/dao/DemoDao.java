@@ -98,11 +98,9 @@ public class DemoDao {
                         .build())
                 .toList();
 
-        var json = convertToJson(userList);
-        log.info("Converted JSON: {}", json);
         return template.getDatabaseClient()
                 .sql("EXECUTE master.dbo.insertManyUsers @json")
-                .bind("@json", json)
+                .bind("@json", convertToJson(userList))
                 .flatMap(Result::getRowsUpdated) // This doesn't seem to give the right response as the inserts happen in the stored proc
                 .reduce(Long::sum)
                 .checkpoint("Creating " + count + " users with stored procedure");

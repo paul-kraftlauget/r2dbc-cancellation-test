@@ -33,13 +33,13 @@ public class DemoService {
 
     public Mono<Long> createSomeUsers(Integer count, String type) {
         if ("BATCH".equalsIgnoreCase(type)) {
-            log.info("Created " + count + " users with batch mode");
+            log.info("Creating " + count + " users with batch mode");
             return demoDao.createSomeUsersBatch(count);
         } else if ("PROCEDURE".equalsIgnoreCase(type)) {
-            log.info("Created " + count + " users with a stored procedure");
+            log.info("Creating " + count + " users with a stored procedure");
             return demoDao.createSomeUsersWithProcedure(count);
         } else {
-            log.info("Created " + count + " users with a bunch of insert statements");
+            log.info("Creating " + count + " users with a bunch of insert statements");
             return demoDao.createSomeUsers(count);
         }
     }

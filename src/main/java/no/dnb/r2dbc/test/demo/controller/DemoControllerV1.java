@@ -47,7 +47,8 @@ public class DemoControllerV1 {
         long start = System.currentTimeMillis();
         return demoService.createSomeUsers(count, type)
                 .map(item -> new ResponseEntity<>(item, HttpStatus.CREATED))
-                .doFinally(signalType -> log.info("Done "+count + " " + type + ": " + (System.currentTimeMillis() - start) + " millis"));
+                .doOnCancel(() -> log.info("Cancelled query"))
+                .doFinally(signalType -> log.info("Done "+count + " " + type + " ("+signalType+"): " + (System.currentTimeMillis() - start) + " millis"));
     }
 
 
